@@ -726,8 +726,6 @@ body {
 
 .ref-email {
   color: var(--text-muted);
-  display: flex;
-  align-items: center;
   margin-top: 2px;
 }
 
