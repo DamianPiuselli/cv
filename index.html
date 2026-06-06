@@ -19,6 +19,16 @@
 
   <!-- Controls Panel (Hidden in print) -->
   <div class="control-panel no-print" id="controlPanel">
+    <!-- Design Switcher -->
+    <div class="control-group">
+      <span class="control-label">Diseño:</span>
+      <div class="view-switch">
+        <a href="index.html" class="view-btn active" id="btnDesignEditorial">Editorial</a>
+        <a href="cv_minimalist.html" class="view-btn" id="btnDesignMinimalist">Minimalista</a>
+        <a href="cv_original.html" class="view-btn" id="btnDesignOriginal">Original</a>
+      </div>
+    </div>
+
     <!-- View Switcher -->
     <div class="control-group">
       <span class="control-label">Vista:</span>
@@ -141,13 +151,19 @@
             <div class="ref-item">
               <div class="ref-name">Martín, Silvana.</div>
               <div class="ref-role">Jefa de departamento, CNEA.</div>
-              <div class="ref-email">Email : <a href="mailto:sgmartin@cnea.gov.ar">sgmartin@cnea.gov.ar</a></div>
+              <div class="ref-email">
+                <svg class="ref-email-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <a href="mailto:sgmartin@cnea.gov.ar">sgmartin@cnea.gov.ar</a>
+              </div>
             </div>
             
             <div class="ref-item">
               <div class="ref-name">Morzán, Ezequiel.</div>
               <div class="ref-role">Jefe de división, CNEA.</div>
-              <div class="ref-email">Email : <a href="mailto:ezequielmorzan@cnea.gov.ar">ezequielmorzan@cnea.gov.ar</a></div>
+              <div class="ref-email">
+                <svg class="ref-email-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <a href="mailto:ezequielmorzan@cnea.gov.ar">ezequielmorzan@cnea.gov.ar</a>
+              </div>
             </div>
           </div>
         </section>
@@ -170,7 +186,7 @@
               <span>Teléfono</span>
             </div>
             <div class="contact-val">
-              <a href="tel:+5491124592480">+54 91124592480</a>
+              <a href="tel:+5491124592480" class="copy-link" data-copy="+5491124592480" title="Click para copiar">+54 91124592480</a>
             </div>
           </div>
           
@@ -180,7 +196,7 @@
               <span>Email</span>
             </div>
             <div class="contact-val">
-              <a href="mailto:damianpiuselli@gmail.com">damianpiuselli@gmail.com</a>
+              <a href="mailto:damianpiuselli@gmail.com" class="copy-link" data-copy="damianpiuselli@gmail.com" title="Click para copiar">damianpiuselli@gmail.com</a>
             </div>
           </div>
           
@@ -302,6 +318,37 @@
       const isHidden = drawer.style.display === 'none';
       drawer.style.display = isHidden ? 'block' : 'none';
       btn.classList.toggle('active', isHidden);
+    }
+
+    // Copy to clipboard functionality
+    document.querySelectorAll('.copy-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const textToCopy = link.getAttribute('data-copy');
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          showToast('¡Copiado al portapapeles!');
+        }).catch(err => {
+          console.error('Error al copiar: ', err);
+        });
+      });
+    });
+
+    function showToast(message) {
+      document.querySelectorAll('.copy-toast').forEach(t => t.remove());
+      
+      const toast = document.createElement('div');
+      toast.className = 'copy-toast no-print';
+      toast.innerHTML = `
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span>${message}</span>
+      `;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 2000);
     }
   </script>
 </body>

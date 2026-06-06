@@ -162,6 +162,8 @@ body {
   cursor: pointer;
   border-radius: 20px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: inline-block;
 }
 
 .view-btn.active {
@@ -266,6 +268,7 @@ body {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+  transition: font-size 0.25s ease-out;
 }
 
 /* A4 View Mode Styles */
@@ -474,9 +477,11 @@ body {
 }
 
 .expertise-tags .tag:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.35);
-  transform: translateY(-1.5px);
+  background: var(--accent-color);
+  color: #FFFFFF;
+  border-color: var(--accent-color);
+  transform: translateY(-2.5px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
 }
 
 /* Language Section */
@@ -652,9 +657,24 @@ body {
 }
 
 .job-date {
-  font-size: 0.85em;
-  font-weight: 700;
+  font-size: 0.78em;
+  font-weight: 600;
   color: var(--text-muted);
+  background-color: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  padding: 3px 8px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 4px;
+  transition: all 0.2s;
+}
+
+.timeline-item.active-job .job-date {
+  background-color: #EFF6FF;
+  color: var(--accent-color);
+  border-color: #BFDBFE;
 }
 
 .job-company {
@@ -701,6 +721,23 @@ body {
 
 .ref-email {
   color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.ref-email-icon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: var(--accent-color);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  margin-right: 6px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .ref-email a {
@@ -811,4 +848,47 @@ body {
     border: 2px solid var(--primary-color) !important;
     box-shadow: none !important;
   }
+}
+
+/* Copy-to-clipboard interactivity */
+.copy-link {
+  position: relative;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.copy-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Toast styling */
+.copy-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color, #1e293b);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-family: var(--font-headings), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  animation: toastFadeIn 0.3s ease-out, toastFadeOut 0.3s ease-in 1.7s forwards;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@keyframes toastFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toastFadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(10px); }
 }
