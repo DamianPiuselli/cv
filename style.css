@@ -639,6 +639,10 @@ body {
 }
 
 /* References */
+.main-content section[aria-labelledby="heading-referencias"] {
+  margin-top: 2.2em;
+}
+
 .references-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
