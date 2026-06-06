@@ -4,20 +4,20 @@ Este proyecto contiene tu currículum convertido a tres formatos web y de impres
 
 ## Estructura y Estilos Disponibles
 
-### 1. Diseño Original con Sidebar Oscuro (Estilo Base)
+### 1. Diseño Editorial Asimétrico (2 Columnas Limpias - Diseño Preferido)
 * **HTML**: [index.html](file:///Users/damm/Projects/cv/index.html)
 * **CSS**: [style.css](file:///Users/damm/Projects/cv/style.css)
-* **Descripción**: Una réplica exacta y mejorada de tu PDF original, con una barra lateral izquierda azul oscuro. Muy llamativo visualmente en pantalla y balanceado.
+* **Descripción**: Tu plantilla principal. Mantiene una estructura de dos columnas pero sitúa la barra lateral a la derecha con un fondo gris claro muy sutil (`#F8FAFC`). Esto elimina el consumo masivo de tinta de fondos oscuros al imprimir en papel, ofreciendo un acabado sobrio, elegante y de tipo "revista científica".
 
 ### 2. Diseño Minimalista Clásico (1 Columna - ATS Friendly)
 * **HTML**: [cv_minimalist.html](file:///Users/damm/Projects/cv/cv_minimalist.html)
 * **CSS**: [style_minimalist.css](file:///Users/damm/Projects/cv/style_minimalist.css)
 * **Descripción**: Formato de ancho completo preferido por los algoritmos de filtrado automático de CVs (ATS). Alinea las fechas hacia el margen derecho y los cargos a la izquierda. Es la convención más formal y limpia para empresas globales y corporativas.
 
-### 3. Diseño Editorial Asimétrico (2 Columnas Limpias)
-* **HTML**: [cv_editorial.html](file:///Users/damm/Projects/cv/cv_editorial.html)
-* **CSS**: [style_editorial.css](file:///Users/damm/Projects/cv/style_editorial.css)
-* **Descripción**: Mantiene una estructura de dos columnas pero sitúa la barra lateral a la derecha con un fondo gris claro muy sutil (`#F8FAFC`). Esto elimina el consumo masivo de tinta de fondos oscuros al imprimir en papel, ofreciendo un acabado sobrio, elegante y de tipo "revista científica".
+### 3. Diseño Original con Sidebar Oscuro (Estilo Base)
+* **HTML**: [cv_original.html](file:///Users/damm/Projects/cv/cv_original.html)
+* **CSS**: [style_original.css](file:///Users/damm/Projects/cv/style_original.css)
+* **Descripción**: Una réplica exacta y mejorada de tu PDF original, con una barra lateral izquierda azul oscuro. Muy llamativo visualmente en pantalla y balanceado.
 
 ---
 
