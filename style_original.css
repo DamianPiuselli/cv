@@ -321,10 +321,14 @@ body {
 }
 
 /* Force 100% height and space distribution in A4 view mode */
-.mode-a4 .sidebar,
-.mode-a4 .main-content {
+.mode-a4 .sidebar {
   height: 100%;
   justify-content: space-between;
+}
+
+.mode-a4 .main-content {
+  height: 100%;
+  justify-content: flex-start;
 }
 
 /* --- SIDEBAR COMPONENTS --- */
