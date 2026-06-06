@@ -350,7 +350,16 @@
       document.body.removeChild(temp);
       
       // Safety margin to prevent overflow due to pixel rounding
-      const targetHeight = a4Height - 5;
+      const targetHeight = a4Height - 6;
+
+      // 2. Temporarily force height to auto on container and columns to get true content heights (unclamped)
+      const prevContainerHeight = container.style.height;
+      const prevSidebarHeight = sidebar.style.height;
+      const prevMainHeight = mainContent.style.height;
+      
+      container.style.height = 'auto';
+      sidebar.style.height = 'auto';
+      mainContent.style.height = 'auto';
 
       let minFont = 10;
       let maxFont = 16;
@@ -383,6 +392,11 @@
         }
         iterations++;
       }
+
+      // 3. Restore original heights
+      container.style.height = prevContainerHeight;
+      sidebar.style.height = prevSidebarHeight;
+      mainContent.style.height = prevMainHeight;
 
       if (!force) {
         setTimeout(() => {

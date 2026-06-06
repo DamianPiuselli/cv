@@ -313,7 +313,11 @@
       document.body.removeChild(temp);
       
       // Safety margin to prevent overflow due to pixel rounding
-      const targetHeight = a4Height - 5;
+      const targetHeight = a4Height - 6;
+
+      // 2. Temporarily force height to auto to get true content height (unclamped)
+      const prevContainerHeight = container.style.height;
+      container.style.height = 'auto';
 
       let minFont = 10;
       let maxFont = 16;
@@ -341,6 +345,9 @@
         }
         iterations++;
       }
+
+      // 3. Restore original height
+      container.style.height = prevContainerHeight;
 
       if (!force) {
         setTimeout(() => {
