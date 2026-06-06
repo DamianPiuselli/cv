@@ -342,7 +342,7 @@
 
       // 1. Get exact A4 height in pixels (forces reflow to get current styled height)
       const a4Height = container.clientHeight;
-      const targetHeight = a4Height - 6; // Safety margin of 6px (approx 1.5mm)
+      const targetHeight = a4Height - (force ? 25 : 6); // Safety margin (larger when printing to absorb margins/DPI differences)
 
       // 2. Temporarily force height to auto and remove min-height to get true content heights (unclamped)
       const prevWrapperMinHeight = wrapper.style.minHeight;
