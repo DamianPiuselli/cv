@@ -353,7 +353,22 @@ body {
   color: var(--sidebar-text-muted);
 }
 
-/* Expertise Tags (Modern Pill Style) */
+/* Expertise Categories & Tags (Modern Pill Style) */
+.expertise-category {
+  font-family: var(--font-headings);
+  font-size: 0.75em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--sidebar-text-muted);
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  letter-spacing: 0.05em;
+}
+
+.expertise-category:first-of-type {
+  margin-top: 0.5em;
+}
+
 .expertise-tags {
   display: flex;
   flex-wrap: wrap;
