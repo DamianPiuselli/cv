@@ -301,6 +301,7 @@ body {
   padding: 2.8em 2em;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -311,8 +312,16 @@ body {
   padding: 2.8em 2.8em;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+/* Force 100% height and space distribution in A4 view mode */
+.mode-a4 .sidebar,
+.mode-a4 .main-content {
+  height: 100%;
+  justify-content: space-between;
 }
 
 /* --- SIDEBAR COMPONENTS --- */
@@ -783,12 +792,14 @@ body {
     background-color: #323B4C !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    justify-content: space-between !important;
   }
   
   .main-content {
     width: 68% !important;
     height: 297mm !important;
     background-color: #FFFFFF !important;
+    justify-content: space-between !important;
   }
   
   .profile-pic {
