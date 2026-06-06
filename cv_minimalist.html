@@ -297,11 +297,23 @@
     }
 
     // Auto-scale CV to fit single A4 page
-    function autoScaleCV() {
-      if (isManualScale) return;
+    function autoScaleCV(force = false) {
+      if (isManualScale && !force) return;
       if (!wrapper.classList.contains('mode-a4')) return;
       
       container.style.transition = 'none';
+
+      // 1. Get exact A4 height in pixels to avoid transition lag or layout issues
+      const temp = document.createElement('div');
+      temp.style.height = '296.5mm';
+      temp.style.position = 'absolute';
+      temp.style.visibility = 'hidden';
+      document.body.appendChild(temp);
+      const a4Height = temp.clientHeight || temp.offsetHeight || 1120.6; // fallback for 296.5mm (96 dpi)
+      document.body.removeChild(temp);
+      
+      // Safety margin to prevent overflow due to pixel rounding
+      const targetHeight = a4Height - 5;
 
       let minFont = 10;
       let maxFont = 16;
@@ -311,7 +323,7 @@
       
       // Reduce font size until it fits
       let iterations = 0;
-      while (container.scrollHeight > container.clientHeight && fontSize > minFont && iterations < 50) {
+      while (container.scrollHeight > targetHeight && fontSize > minFont && iterations < 50) {
         fontSize -= 0.1;
         container.style.fontSize = fontSize + 'px';
         iterations++;
@@ -319,10 +331,10 @@
 
       // Increase font size slightly to fill space if possible
       iterations = 0;
-      while (container.scrollHeight <= container.clientHeight && fontSize < maxFont && iterations < 50) {
+      while (container.scrollHeight <= targetHeight && fontSize < maxFont && iterations < 50) {
         fontSize += 0.1;
         container.style.fontSize = fontSize + 'px';
-        if (container.scrollHeight > container.clientHeight) {
+        if (container.scrollHeight > targetHeight) {
           fontSize -= 0.1;
           container.style.fontSize = fontSize + 'px';
           break;
@@ -330,9 +342,11 @@
         iterations++;
       }
 
-      setTimeout(() => {
-        container.style.transition = 'font-size 0.25s ease-out';
-      }, 50);
+      if (!force) {
+        setTimeout(() => {
+          container.style.transition = 'font-size 0.25s ease-out';
+        }, 50);
+      }
 
       if (fontSlider && sliderVal) {
         fontSlider.value = fontSize.toFixed(1);
@@ -344,6 +358,38 @@
     window.addEventListener('load', autoScaleCV);
     window.addEventListener('resize', autoScaleCV);
     document.addEventListener('DOMContentLoaded', autoScaleCV);
+
+    // Listeners for printing to guarantee exactly one A4 page fit
+    window.addEventListener('beforeprint', () => {
+      wrapper._originalMode = wrapper.classList.contains('mode-a4') ? 'a4' : 'web';
+      wrapper._originalFontSize = container.style.fontSize;
+      wrapper._originalIsManual = isManualScale;
+      
+      wrapper.className = 'cv-wrapper mode-a4';
+      autoScaleCV(true);
+    });
+
+    window.addEventListener('afterprint', () => {
+      isManualScale = wrapper._originalIsManual;
+      setViewMode(wrapper._originalMode);
+      if (wrapper._originalMode === 'web') {
+        container.style.fontSize = wrapper._originalFontSize;
+        if (fontSlider && sliderVal) {
+          fontSlider.value = parseFloat(wrapper._originalFontSize) || 14;
+          sliderVal.textContent = wrapper._originalFontSize;
+        }
+      } else {
+        if (isManualScale) {
+          container.style.fontSize = wrapper._originalFontSize;
+          if (fontSlider && sliderVal) {
+            fontSlider.value = parseFloat(wrapper._originalFontSize) || 13.5;
+            sliderVal.textContent = wrapper._originalFontSize;
+          }
+        } else {
+          autoScaleCV();
+        }
+      }
+    });
 
     // Copy to clipboard functionality
     document.querySelectorAll('.copy-link').forEach(link => {

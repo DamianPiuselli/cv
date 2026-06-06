@@ -215,7 +215,7 @@ body {
 /* CV Main Container Wrapper */
 .cv-wrapper {
   margin: 20px auto 50px auto;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation: fadeIn 0.8s ease forwards;
 }
 
@@ -235,9 +235,9 @@ body {
 /* View Modes */
 .mode-a4 {
   width: 210mm;
-  height: 297mm;
+  height: 296.5mm;
   max-width: 210mm;
-  min-height: 297mm;
+  min-height: 296.5mm;
   border-radius: 4px;
 }
 
@@ -558,6 +558,11 @@ body {
 
 /* --- PRINT MEDIA STYLES --- */
 @media print {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
   @page {
     size: A4 portrait;
     margin: 0;
@@ -579,20 +584,24 @@ body {
     margin: 0 !important;
     padding: 0 !important;
     width: 210mm !important;
-    height: 297mm !important;
+    height: 296.5mm !important;
     max-width: 210mm !important;
     box-shadow: none !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
   }
   
   .cv-container {
     box-shadow: none !important;
     border-radius: 0 !important;
     width: 210mm !important;
-    height: 297mm !important;
+    height: 100% !important;
     padding: 2.8em 2.8em !important; /* Slightly tighter for printing */
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
   }
   
   .active-dot {

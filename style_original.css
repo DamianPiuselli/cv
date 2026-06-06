@@ -245,7 +245,7 @@ body {
 /* CV Main Container */
 .cv-wrapper {
   margin: 20px auto 50px auto;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
@@ -274,9 +274,9 @@ body {
 /* A4 View Mode Styles */
 .mode-a4 {
   width: 210mm;
-  height: 297mm;
+  height: 296.5mm;
   max-width: 210mm;
-  min-height: 297mm;
+  min-height: 296.5mm;
   border-radius: 4px;
 }
 
@@ -792,6 +792,11 @@ body {
 
 /* --- PRINT MEDIA STYLES --- */
 @media print {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
   @page {
     size: A4 portrait;
     margin: 0;
@@ -814,23 +819,25 @@ body {
     margin: 0 !important;
     padding: 0 !important;
     width: 210mm !important;
-    height: 297mm !important;
+    height: 296.5mm !important;
     max-width: 210mm !important;
     box-shadow: none !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
   }
   
   .cv-container {
     box-shadow: none !important;
     border-radius: 0 !important;
     width: 210mm !important;
-    height: 297mm !important;
-    page-break-after: avoid;
-    page-break-inside: avoid;
+    height: 100% !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
   }
   
   .sidebar {
     width: 32% !important;
-    height: 297mm !important;
+    height: 100% !important;
     background-color: #323B4C !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
@@ -840,7 +847,7 @@ body {
   
   .main-content {
     width: 68% !important;
-    height: 297mm !important;
+    height: 100% !important;
     background-color: #FFFFFF !important;
     justify-content: space-between !important;
   }
