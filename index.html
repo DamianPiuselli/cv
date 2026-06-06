@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Damian Piuselli - CV</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="CV de Damian Piuselli - Químico Analítico. Experiencia en técnicas cromatográficas, de plasma y quimiometría.">
+  <meta name="author" content="Damian Piuselli">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Controls Panel (Hidden in print) -->
+  <div class="control-panel no-print" id="controlPanel">
+    <!-- View Switcher -->
+    <div class="control-group">
+      <span class="control-label">Vista:</span>
+      <div class="view-switch">
+        <button class="view-btn active" id="btnA4" onclick="setViewMode('a4')">A4 (Impresión)</button>
+        <button class="view-btn" id="btnWeb" onclick="setViewMode('web')">Web (Adaptable)</button>
+      </div>
+    </div>
+
+    <!-- Font Size Slider -->
+    <div class="control-group">
+      <span class="control-label">Tamaño:</span>
+      <div class="slider-container">
+        <input type="range" min="11" max="17" step="0.5" value="13.5" class="font-slider" id="fontSlider">
+        <span class="slider-val" id="sliderVal">13.5px</span>
+      </div>
+    </div>
+
+    <!-- Print Button -->
+    <button class="btn-print" onclick="window.print()">
+      <svg viewBox="0 0 24 24">
+        <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
+      </svg>
+      Imprimir PDF
+    </button>
+  </div>
+
+  <!-- CV Wrapper (Controls size of preview/print) -->
+  <div class="cv-wrapper mode-a4" id="cvWrapper">
+    <main class="cv-container" id="cvContainer" style="font-size: 13.5px;">
+      
+      <!-- Sidebar (Left Column) -->
+      <aside class="sidebar">
+        <!-- Profile picture -->
+        <div class="profile-container">
+          <img src="profile.png" alt="Damian Piuselli" class="profile-pic">
+        </div>
+        
+        <!-- Contact Information -->
+        <section aria-labelledby="heading-contacto">
+          <h2 id="heading-contacto">Contacto</h2>
+          
+          <div class="contact-item">
+            <div class="contact-label">Telefono</div>
+            <div class="contact-val">
+              <a href="tel:+5491124592480">+54 91124592480</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div class="contact-val">
+              <a href="mailto:damianpiuselli@gmail.com">damianpiuselli@gmail.com</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-label">Ubicacion</div>
+            <div class="contact-val">San Martin, Buenos Aires.</div>
+          </div>
+        </section>
+        
+        <!-- Education -->
+        <section aria-labelledby="heading-educacion">
+          <h2 id="heading-educacion">Educación</h2>
+          
+          <div class="education-item">
+            <div class="edu-year">2023</div>
+            <div class="edu-degree">Lic. en Cs. de datos.</div>
+            <div class="edu-school">ECyT, UNSAM.</div>
+          </div>
+          
+          <div class="education-item">
+            <div class="edu-year">2009</div>
+            <div class="edu-degree">Lic. en Cs. Quimicas (inc)</div>
+            <div class="edu-school">FCEyN, UBA.</div>
+          </div>
+        </section>
+        
+        <!-- Expertise -->
+        <section aria-labelledby="heading-expertise">
+          <h2 id="heading-expertise">Expertise</h2>
+          <ul class="expertise-list">
+            <li>GC/MS</li>
+            <li>ICP-ms</li>
+            <li>ICP-OES</li>
+            <li>Quimiometría</li>
+            <li>Programación en Python</li>
+            <li>Validación de métodos analíticos.</li>
+          </ul>
+        </section>
+        
+        <!-- Languages -->
+        <section aria-labelledby="heading-lenguaje">
+          <h2 id="heading-lenguaje">Lenguaje</h2>
+          <div class="language-item">Español</div>
+          <div class="language-item">Ingles (B2)</div>
+        </section>
+      </aside>
+      
+      <!-- Main Content (Right Column) -->
+      <section class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <h1>Damian Piuselli</h1>
+          <div class="title">Químico Analítico</div>
+        </header>
+        
+        <!-- Summary -->
+        <p class="summary-text">
+          Me desempeño de manera continua en el área de ciencia y técnica desde mi egreso como técnico químico en 2008. Tengo amplia experiencia en una gran variedad de técnicas analíticas, siendo mis especialidades las técnicas basadas en plasma y la cromatografía de gases. En adición a mis capacidades en el área instrumental tengo experiencia en quimiometría y ciencias de datos aplicada a la química. Actualmente estoy interesado en la aplicación de modelos bayesianos a la química analítica, en técnicas analíticas hifenadas y en espectrometría de masas de alta resolución.
+        </p>
+        
+        <!-- Experience -->
+        <section aria-labelledby="heading-experiencia">
+          <h2 id="heading-experiencia">Experiencia</h2>
+          
+          <div class="timeline">
+            <!-- Experience Item 1 -->
+            <article class="timeline-item">
+              <div class="job-meta">
+                <span class="job-date">2016 - Presente</span>
+                <span class="job-company">Comision Nacional de Energía Atómica.</span>
+              </div>
+              <h3 class="job-title">Analista</h3>
+              <p class="job-desc">
+                Análisis de trazas y ultrazas por medio de técnicas espectroscópicas y cromatograficas en matrices de interés nuclear y matrices ambientales. Principalmente impurezas en uranio y aleaciones de interés nuclear por ICP-MS/OES. Impurezas diversas en aguas, suelos, minerales y aerosoles por ICP-MS/OES. Gases permanentes en la atmósfera interna de vainas de combustibles nucleares por GC-TCD. Indicadores de calidad de aire por GC-FID/MS. Aplicación de quimiometría a múltiples trabajos para optimización, identificación de origen y calibración. Trabajando en modelos bayesianos alternativos a los modelos frecuentistas clásicos utilizados en química analítica (MLR, PLS, PARAFAC).
+              </p>
+            </article>
+
+            <!-- Experience Item 2 -->
+            <article class="timeline-item">
+              <div class="job-meta">
+                <span class="job-date">2024 - Presente</span>
+                <span class="job-company">3ia - EHyS - UNSAM</span>
+              </div>
+              <h3 class="job-title">Analista</h3>
+              <p class="job-desc">
+                Coordinar y ejecutar los servicios realizados en el laboratorio de ICP-MS, con el fin de satisfacer la demanda interna y externa para determinaciones en esta técnica. Determinación de trazas y ultrazas en diversas matrices, especiación y cuantificación de nanoparticulas.
+              </p>
+            </article>
+
+            <!-- Experience Item 3 -->
+            <article class="timeline-item">
+              <div class="job-meta">
+                <span class="job-date">2011 - 2014</span>
+                <span class="job-company">Instituto Nacional de Tecnología Industrial</span>
+              </div>
+              <h3 class="job-title">Analista</h3>
+              <p class="job-desc">
+                Cuantificación por medio de técnicas cromatográficas de contaminantes orgánicos en matrices ambientales, insumos médicos y muestras farmacéuticas. Principalmente óxido de etileno, solventes residuales, monómeros plásticos, PCBs, clorofenoles, PAHs, DRO, GRO y otros hidrocarburos en matrices ambientales. Validación de técnicas analíticas y elaboración de documentos descriptivos y instrucciones de trabajo según ISO-17025.
+              </p>
+            </article>
+
+            <!-- Experience Item 4 -->
+            <article class="timeline-item">
+              <div class="job-meta">
+                <span class="job-date">2009 - 2011</span>
+                <span class="job-company">CIHIDECAR - FCEyN - UBA</span>
+              </div>
+              <h3 class="job-title">Investigador Ad Honorem</h3>
+              <p class="job-desc">
+                Síntesis de polisacáridos y derivados, para estudios de inhibición de enzimas blanco en Trypanosoma cruzi. Purificación y caracterización de productos de síntesis por cromatografía iónica, resonancia magnética nuclear y ensayos de inhibición enzimática.
+              </p>
+            </article>
+          </div>
+        </section>
+        
+        <!-- References -->
+        <section aria-labelledby="heading-referencias">
+          <h2 id="heading-referencias">Referencias</h2>
+          <div class="references-grid">
+            <!-- Ref 1 -->
+            <div class="ref-item">
+              <div class="ref-name">Silvana, Martin.</div>
+              <div class="ref-role">Jefa de departamento, CNEA.</div>
+              <div class="ref-email">Email : <a href="mailto:sgmartin@cnea.gov.ar">sgmartin@cnea.gov.ar</a></div>
+            </div>
+            
+            <!-- Ref 2 -->
+            <div class="ref-item">
+              <div class="ref-name">Ezequiel, Morzan.</div>
+              <div class="ref-role">Jefe de division, CNEA.</div>
+              <div class="ref-email">Email : <a href="mailto:ezequielmorzan@cnea.gov.ar">ezequielmorzan@cnea.gov.ar</a></div>
+            </div>
+          </div>
+        </section>
+      </section>
+      
+    </main>
+  </div>
+
+  <!-- Javascript for UI controls -->
+  <script>
+    const wrapper = document.getElementById('cvWrapper');
+    const container = document.getElementById('cvContainer');
+    const fontSlider = document.getElementById('fontSlider');
+    const sliderVal = document.getElementById('sliderVal');
+    
+    // View mode switching
+    function setViewMode(mode) {
+      document.getElementById('btnA4').classList.toggle('active', mode === 'a4');
+      document.getElementById('btnWeb').classList.toggle('active', mode === 'web');
+      
+      if (mode === 'a4') {
+        wrapper.className = 'cv-wrapper mode-a4';
+      } else {
+        wrapper.className = 'cv-wrapper mode-web';
+      }
+    }
+    
+    // Font size control
+    fontSlider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      container.style.fontSize = val + 'px';
+      sliderVal.textContent = val + 'px';
+    });
+  </script>
+</body>
+</html>
