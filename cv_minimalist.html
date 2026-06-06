@@ -38,14 +38,7 @@
       </div>
     </div>
 
-    <!-- Font Size Slider -->
-    <div class="control-group">
-      <span class="control-label">Tamaño:</span>
-      <div class="slider-container">
-        <input type="range" min="11" max="17" step="0.5" value="13.5" class="font-slider" id="fontSlider">
-        <span class="slider-val" id="sliderVal">13.5px</span>
-      </div>
-    </div>
+
 
     <button class="view-btn" id="btnHelp" onclick="toggleHelp()" style="margin-left: 10px;">¿Cómo Imprimir?</button>
 
@@ -259,35 +252,18 @@
   <script>
     const wrapper = document.getElementById('cvWrapper');
     const container = document.getElementById('cvContainer');
-    const fontSlider = document.getElementById('fontSlider');
-    const sliderVal = document.getElementById('sliderVal');
-    let isManualScale = false;
-    
+
     function setViewMode(mode) {
-      isManualScale = false;
       document.getElementById('btnA4').classList.toggle('active', mode === 'a4');
       document.getElementById('btnWeb').classList.toggle('active', mode === 'web');
       
       if (mode === 'a4') {
         wrapper.className = 'cv-wrapper mode-a4';
-        autoScaleCV();
       } else {
         wrapper.className = 'cv-wrapper mode-web';
-        container.style.fontSize = '14px';
-        if (fontSlider && sliderVal) {
-          fontSlider.value = '14';
-          sliderVal.textContent = '14px';
-        }
       }
     }
     
-    fontSlider.addEventListener('input', (e) => {
-      isManualScale = true;
-      const val = e.target.value;
-      container.style.fontSize = val + 'px';
-      sliderVal.textContent = val + 'px';
-    });
-
     function toggleHelp() {
       const drawer = document.getElementById('helpDrawer');
       const btn = document.getElementById('btnHelp');
@@ -295,107 +271,6 @@
       drawer.style.display = isHidden ? 'block' : 'none';
       btn.classList.toggle('active', isHidden);
     }
-
-    // Auto-scale CV to fit single A4 page
-    function autoScaleCV(force = false) {
-      if (isManualScale && !force) return;
-      if (!wrapper.classList.contains('mode-a4')) return;
-      
-      container.style.transition = 'none';
-
-      // 1. Get exact A4 height in pixels (forces reflow to get current styled height)
-      const a4Height = container.clientHeight;
-      const targetHeight = a4Height - (force ? 25 : 6); // Safety margin (larger when printing to absorb margins/DPI differences)
-
-      // 2. Temporarily force height to auto and remove min-height to get true content height (unclamped)
-      const prevWrapperMinHeight = wrapper.style.minHeight;
-      const prevWrapperHeight = wrapper.style.height;
-      const prevContainerHeight = container.style.height;
-      
-      wrapper.style.minHeight = '0';
-      wrapper.style.height = 'auto';
-      container.style.height = 'auto';
-
-      let minFont = 10;
-      let maxFont = 16;
-      let fontSize = 14.5;
-      
-      container.style.fontSize = fontSize + 'px';
-      
-      // Reduce font size until it fits
-      let iterations = 0;
-      while (container.scrollHeight > targetHeight && fontSize > minFont && iterations < 50) {
-        fontSize -= 0.1;
-        container.style.fontSize = fontSize + 'px';
-        iterations++;
-      }
-
-      // Increase font size slightly to fill space if possible
-      iterations = 0;
-      while (container.scrollHeight <= targetHeight && fontSize < maxFont && iterations < 50) {
-        fontSize += 0.1;
-        container.style.fontSize = fontSize + 'px';
-        if (container.scrollHeight > targetHeight) {
-          fontSize -= 0.1;
-          container.style.fontSize = fontSize + 'px';
-          break;
-        }
-        iterations++;
-      }
-
-      // 3. Restore original height
-      wrapper.style.minHeight = prevWrapperMinHeight;
-      wrapper.style.height = prevWrapperHeight;
-      container.style.height = prevContainerHeight;
-
-      if (!force) {
-        setTimeout(() => {
-          container.style.transition = 'font-size 0.25s ease-out';
-        }, 50);
-      }
-
-      if (fontSlider && sliderVal) {
-        fontSlider.value = fontSize.toFixed(1);
-        sliderVal.textContent = fontSize.toFixed(1) + 'px';
-      }
-    }
-
-    // Listeners for auto-scale
-    window.addEventListener('load', autoScaleCV);
-    window.addEventListener('resize', autoScaleCV);
-    document.addEventListener('DOMContentLoaded', autoScaleCV);
-
-    // Listeners for printing to guarantee exactly one A4 page fit
-    window.addEventListener('beforeprint', () => {
-      wrapper._originalMode = wrapper.classList.contains('mode-a4') ? 'a4' : 'web';
-      wrapper._originalFontSize = container.style.fontSize;
-      wrapper._originalIsManual = isManualScale;
-      
-      wrapper.className = 'cv-wrapper mode-a4';
-      autoScaleCV(true);
-    });
-
-    window.addEventListener('afterprint', () => {
-      isManualScale = wrapper._originalIsManual;
-      setViewMode(wrapper._originalMode);
-      if (wrapper._originalMode === 'web') {
-        container.style.fontSize = wrapper._originalFontSize;
-        if (fontSlider && sliderVal) {
-          fontSlider.value = parseFloat(wrapper._originalFontSize) || 14;
-          sliderVal.textContent = wrapper._originalFontSize;
-        }
-      } else {
-        if (isManualScale) {
-          container.style.fontSize = wrapper._originalFontSize;
-          if (fontSlider && sliderVal) {
-            fontSlider.value = parseFloat(wrapper._originalFontSize) || 13.5;
-            sliderVal.textContent = wrapper._originalFontSize;
-          }
-        } else {
-          autoScaleCV();
-        }
-      }
-    });
 
     // Copy to clipboard functionality
     document.querySelectorAll('.copy-link').forEach(link => {
