@@ -588,9 +588,9 @@ body {
   .cv-wrapper {
     margin: 0 !important;
     padding: 0 !important;
-    width: 210mm !important;
-    height: 296.5mm !important;
-    max-width: 210mm !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
     box-shadow: none !important;
     page-break-after: avoid !important;
     page-break-inside: avoid !important;
@@ -599,7 +599,7 @@ body {
   .cv-container {
     box-shadow: none !important;
     border-radius: 0 !important;
-    width: 210mm !important;
+    width: 100% !important;
     height: 100% !important;
     padding: 2.8em 2.8em !important; /* Slightly tighter for printing */
     display: flex !important;
