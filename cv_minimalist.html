@@ -261,19 +261,28 @@
     const container = document.getElementById('cvContainer');
     const fontSlider = document.getElementById('fontSlider');
     const sliderVal = document.getElementById('sliderVal');
+    let isManualScale = false;
     
     function setViewMode(mode) {
+      isManualScale = false;
       document.getElementById('btnA4').classList.toggle('active', mode === 'a4');
       document.getElementById('btnWeb').classList.toggle('active', mode === 'web');
       
       if (mode === 'a4') {
         wrapper.className = 'cv-wrapper mode-a4';
+        autoScaleCV();
       } else {
         wrapper.className = 'cv-wrapper mode-web';
+        container.style.fontSize = '14px';
+        if (fontSlider && sliderVal) {
+          fontSlider.value = '14';
+          sliderVal.textContent = '14px';
+        }
       }
     }
     
     fontSlider.addEventListener('input', (e) => {
+      isManualScale = true;
       const val = e.target.value;
       container.style.fontSize = val + 'px';
       sliderVal.textContent = val + 'px';
@@ -286,6 +295,55 @@
       drawer.style.display = isHidden ? 'block' : 'none';
       btn.classList.toggle('active', isHidden);
     }
+
+    // Auto-scale CV to fit single A4 page
+    function autoScaleCV() {
+      if (isManualScale) return;
+      if (!wrapper.classList.contains('mode-a4')) return;
+      
+      container.style.transition = 'none';
+
+      let minFont = 10;
+      let maxFont = 16;
+      let fontSize = 14.5;
+      
+      container.style.fontSize = fontSize + 'px';
+      
+      // Reduce font size until it fits
+      let iterations = 0;
+      while (container.scrollHeight > container.clientHeight && fontSize > minFont && iterations < 50) {
+        fontSize -= 0.1;
+        container.style.fontSize = fontSize + 'px';
+        iterations++;
+      }
+
+      // Increase font size slightly to fill space if possible
+      iterations = 0;
+      while (container.scrollHeight <= container.clientHeight && fontSize < maxFont && iterations < 50) {
+        fontSize += 0.1;
+        container.style.fontSize = fontSize + 'px';
+        if (container.scrollHeight > container.clientHeight) {
+          fontSize -= 0.1;
+          container.style.fontSize = fontSize + 'px';
+          break;
+        }
+        iterations++;
+      }
+
+      setTimeout(() => {
+        container.style.transition = 'font-size 0.25s ease-out';
+      }, 50);
+
+      if (fontSlider && sliderVal) {
+        fontSlider.value = fontSize.toFixed(1);
+        sliderVal.textContent = fontSize.toFixed(1) + 'px';
+      }
+    }
+
+    // Listeners for auto-scale
+    window.addEventListener('load', autoScaleCV);
+    window.addEventListener('resize', autoScaleCV);
+    document.addEventListener('DOMContentLoaded', autoScaleCV);
 
     // Copy to clipboard functionality
     document.querySelectorAll('.copy-link').forEach(link => {
