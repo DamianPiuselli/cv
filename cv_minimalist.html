@@ -303,20 +303,17 @@
       
       container.style.transition = 'none';
 
-      // 1. Get exact A4 height in pixels to avoid transition lag or layout issues
-      const temp = document.createElement('div');
-      temp.style.height = '296.5mm';
-      temp.style.position = 'absolute';
-      temp.style.visibility = 'hidden';
-      document.body.appendChild(temp);
-      const a4Height = temp.clientHeight || temp.offsetHeight || 1120.6; // fallback for 296.5mm (96 dpi)
-      document.body.removeChild(temp);
-      
-      // Safety margin to prevent overflow due to pixel rounding
-      const targetHeight = a4Height - 6;
+      // 1. Get exact A4 height in pixels (forces reflow to get current styled height)
+      const a4Height = container.clientHeight;
+      const targetHeight = a4Height - 6; // Safety margin of 6px (approx 1.5mm)
 
-      // 2. Temporarily force height to auto to get true content height (unclamped)
+      // 2. Temporarily force height to auto and remove min-height to get true content height (unclamped)
+      const prevWrapperMinHeight = wrapper.style.minHeight;
+      const prevWrapperHeight = wrapper.style.height;
       const prevContainerHeight = container.style.height;
+      
+      wrapper.style.minHeight = '0';
+      wrapper.style.height = 'auto';
       container.style.height = 'auto';
 
       let minFont = 10;
@@ -347,6 +344,8 @@
       }
 
       // 3. Restore original height
+      wrapper.style.minHeight = prevWrapperMinHeight;
+      wrapper.style.height = prevWrapperHeight;
       container.style.height = prevContainerHeight;
 
       if (!force) {
