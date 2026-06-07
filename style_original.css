@@ -11,6 +11,7 @@
   --sidebar-bg: #323B4C;
   --sidebar-text: #FFFFFF;
   --sidebar-text-muted: rgba(255, 255, 255, 0.7);
+  --accent-color: #2563EB; /* Vibrant Blue */
   
   /* Typography */
   --font-headings: 'Montserrat', sans-serif;
@@ -727,6 +728,8 @@ body {
 
 .ref-email {
   color: var(--text-muted);
+  display: flex;
+  align-items: center;
   margin-top: 2px;
 }
 
