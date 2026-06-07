@@ -40,27 +40,13 @@
 
 
 
-    <!-- Help Toggle Button -->
-    <button class="view-btn" id="btnHelp" onclick="toggleHelp()" style="margin-left: 10px;">¿Cómo Imprimir?</button>
-
-    <!-- Print Button -->
-    <button class="btn-print" onclick="window.print()">
+    <!-- Download Button -->
+    <a href="cv_editorial.pdf" download="Damian_Piuselli_CV_Editorial.pdf" class="btn-print">
       <svg viewBox="0 0 24 24">
-        <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
+        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
       </svg>
-      Imprimir PDF
-    </button>
-  </div>
-
-  <!-- Print Help Drawer (Hidden in print) -->
-  <div class="help-drawer no-print" id="helpDrawer" style="display: none;">
-    <h3>Guía de Configuración para Imprimir en PDF</h3>
-    <ul>
-      <li><strong>Destino:</strong> Selecciona <strong>"Guardar como PDF"</strong> en el navegador.</li>
-      <li><strong>Márgenes:</strong> Cambia la configuración a <strong>"Ninguno" (None)</strong>.</li>
-      <li><strong>Gráficos de fondo:</strong> Activa o marca la casilla <strong>"Gráficos de fondo"</strong>.</li>
-      <li><strong>Cabeceras y pies de página:</strong> Desactiva o desmarca esta casilla.</li>
-    </ul>
+      Descargar PDF
+    </a>
   </div>
 
   <!-- CV Wrapper (Controls size of preview/print) -->
@@ -294,15 +280,7 @@
         wrapper.className = 'cv-wrapper mode-web';
       }
     }
-    
-    // Help drawer toggle
-    function toggleHelp() {
-      const drawer = document.getElementById('helpDrawer');
-      const btn = document.getElementById('btnHelp');
-      const isHidden = drawer.style.display === 'none';
-      drawer.style.display = isHidden ? 'block' : 'none';
-      btn.classList.toggle('active', isHidden);
-    }
+
 
     // Copy to clipboard functionality
     document.querySelectorAll('.copy-link').forEach(link => {
