@@ -1,6 +1,6 @@
 # Damian Piuselli - Colección de Plantillas de CV (HTML/CSS)
 
-Este proyecto contiene tu currículum convertido a tres formatos web y de impresión diferentes, diseñados con los más altos estándares y convenciones de diseño de currículums profesionales.
+Este proyecto contiene tu currículum convertido a dos formatos web y de impresión diferentes, diseñados con los más altos estándares y convenciones de diseño de currículums profesionales.
 
 ## Estructura y Estilos Disponibles
 
@@ -14,17 +14,11 @@ Este proyecto contiene tu currículum convertido a tres formatos web y de impres
 * **CSS**: [style_minimalist.css](file:///Users/damm/Projects/cv/style_minimalist.css)
 * **Descripción**: Formato de ancho completo preferido por los algoritmos de filtrado automático de CVs (ATS). Alinea las fechas hacia el margen derecho y los cargos a la izquierda. Es la convención más formal y limpia para empresas globales y corporativas.
 
-### 3. Diseño Original con Sidebar Oscuro (Estilo Base)
-* **HTML**: [cv_original.html](file:///Users/damm/Projects/cv/cv_original.html)
-* **CSS**: [style_original.css](file:///Users/damm/Projects/cv/style_original.css)
-* **Descripción**: Una réplica exacta y mejorada de tu PDF original, con una barra lateral izquierda azul oscuro. Muy llamativo visualmente en pantalla y balanceado.
-
 ---
 
 ## Archivos del Proyecto
 
 * **[profile.png](file:///Users/damm/Projects/cv/profile.png)**: Tu foto de perfil, recortada automáticamente en círculo en todas las plantillas.
-* **[_CV Resume.pdf](file:///Users/damm/Projects/cv/_CV%20Resume.pdf)**: El currículum original en formato PDF.
 
 ---
 
