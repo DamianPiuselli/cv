@@ -1,0 +1,3 @@
+# No external Python dependencies are needed to run generate_pdfs.py.
+# The script uses the standard library (os, sys, subprocess, shutil)
+# and leverages the local Google Chrome/Chromium installation.
